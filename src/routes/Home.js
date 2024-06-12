@@ -22,16 +22,19 @@ const Home = ({ userObj }) => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-        const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
-        const response = await uploadString(attachmentRef, attachment, 'data_url');
-        const attachmentUrl = await getDownloadURL(attachmentRef);
+        let attachmentUrl = "";
+        if (attachment !== "") {
+            const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+            const response = await uploadString(attachmentRef, attachment, 'data_url');
+            attachmentUrl = await getDownloadURL(attachmentRef);
+        }
         await addDoc(collection(dbService, "nweets"), {
             text: nweet,
             createdAt: Date.now(),
             creatorId: userObj.uid,
             attachmentUrl,
         });
-        setNweets("");
+        setNweet("");
         setAttachment("");
     };
     
