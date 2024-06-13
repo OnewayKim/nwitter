@@ -61,7 +61,7 @@ const NweetFactory = ({ userObj }) => {
 
     return (
         <form onSubmit={onSubmit} className='factoryForm'>
-            <div className='factoryInput_container'>
+            <div className='factoryInput__container'>
                 <input
                     className='factoryInput__input'
                     value={nweet}
